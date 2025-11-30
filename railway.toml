@@ -1,16 +1,17 @@
 [build]
 php_version = "8.3"
 
+[php]
 extensions = [
-    "gd",
-    "pdo_mysql",
-    "pdo",
-    "mbstring",
-    "openssl",
-    "curl",
-    "xml",
-    "fileinfo",
-    "json",
-    "tokenizer",
-    "session"
+  "gd",
+  "pdo_mysql",
+  "pdo",
+  "mbstring",
+  "openssl",
+  "curl",
+  "xml",
+  "fileinfo",
+  "json",
+  "tokenizer",
+  "session"
 ]
