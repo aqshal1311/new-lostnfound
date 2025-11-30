@@ -1,18 +1,16 @@
-{
-  "build": {
-    "builder": "railway/php:8.3",
-    "extensions": [
-      "gd",
-      "pdo_mysql",
-      "pdo",
-      "mbstring",
-      "openssl",
-      "curl",
-      "xml",
-      "fileinfo",
-      "json",
-      "tokenizer",
-      "session"
-    ]
-  }
-}
+[build]
+php_version = "8.3"
+
+extensions = [
+    "gd",
+    "pdo_mysql",
+    "pdo",
+    "mbstring",
+    "openssl",
+    "curl",
+    "xml",
+    "fileinfo",
+    "json",
+    "tokenizer",
+    "session"
+]
