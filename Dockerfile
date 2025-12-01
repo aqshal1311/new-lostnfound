@@ -24,6 +24,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Permissions
 RUN chmod -R 777 storage bootstrap/cache
 
+RUN mkdir -p /var/log/nginx
+
 # Copy Nginx global config
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
