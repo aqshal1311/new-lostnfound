@@ -29,7 +29,7 @@ RUN chmod -R 777 storage bootstrap/cache
 
 # Fix nginx folder issues
 RUN mkdir -p /var/log/nginx
-RUN mkdir -p /var/run/php
+RUN mkdir -p /var/run
 
 # Copy Nginx global config
 COPY ./nginx.conf /etc/nginx/nginx.conf
