@@ -24,7 +24,12 @@ RUN composer install --no-dev --optimize-autoloader
 # Permissions
 RUN chmod -R 777 storage bootstrap/cache
 
+# Permission
+RUN chmod -R 777 storage bootstrap/cache
+
+# Fix nginx folder issues
 RUN mkdir -p /var/log/nginx
+RUN mkdir -p /var/run/php
 
 # Copy Nginx global config
 COPY ./nginx.conf /etc/nginx/nginx.conf
