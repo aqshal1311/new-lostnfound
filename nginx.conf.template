@@ -11,14 +11,11 @@ server {
 
     location ~ \.php$ {
         include fastcgi_params;
+
         fastcgi_pass unix:/var/run/php/php-fpm.sock;
 
-        # FIX SCRIPT_FILENAME
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-
-        # FIX PATH_INFO
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO $fastcgi_path_info;
-
         fastcgi_index index.php;
     }
 }
