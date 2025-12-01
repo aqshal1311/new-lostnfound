@@ -24,7 +24,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chmod -R 777 storage bootstrap/cache
 
 # Copy Nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf.template /etc/nginx/conf.d/default.conf.template
 
 # Supervisor config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
