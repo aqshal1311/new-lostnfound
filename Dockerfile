@@ -34,9 +34,6 @@ RUN mkdir -p /var/run
 # Copy Nginx global config
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Copy Nginx server template
-COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
-
 # Supervisor config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
