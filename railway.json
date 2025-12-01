@@ -1,6 +1,6 @@
 {
   "build": {
-    "builder": "railway/php:8.3"
+    "builder": "dockerfile",
     "extensions": [
       "gd",
       "pdo_mysql",
