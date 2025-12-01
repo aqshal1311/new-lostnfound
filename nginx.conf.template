@@ -13,9 +13,9 @@ server {
         include fastcgi_params;
         fastcgi_pass unix:/var/run/php/php-fpm.sock;
 
-        # FIX: path info + valid fastcgi_param format
+        # FIX: benarkan SCRIPT_FILENAME & hilangkan PATH_INFO yang rusak
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param PATH_INFO "";
 
         fastcgi_index index.php;
     }
