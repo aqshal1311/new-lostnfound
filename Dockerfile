@@ -1,10 +1,11 @@
 FROM php:8.3-fpm
 
 # Install dependencies
-RUN apt-get install -y nginx-full
+RUN apt-get update && apt-get install -y \
+    nginx-full \
     git curl unzip \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev libzip-dev \
-    nginx supervisor gettext-base \
+    supervisor gettext-base \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
@@ -20,15 +21,14 @@ COPY . .
 # Composer install
 RUN composer install --no-dev --optimize-autoloader
 
-# Permission
+# Permissions
 RUN chmod -R 777 storage bootstrap/cache
 
+# Copy Nginx global config
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Copy Nginx config
+# Copy Nginx server template
 COPY ./nginx.conf.template /etc/nginx/conf.d/default.conf.template
-
-COPY ./mime.types /etc/nginx/mime.types
 
 # Supervisor config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
