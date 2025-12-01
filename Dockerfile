@@ -4,7 +4,7 @@ FROM php:8.3-fpm
 RUN apt-get update && apt-get install -y \
     git curl unzip \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev libzip-dev \
-    nginx supervisor \
+    nginx supervisor gettext-base \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
