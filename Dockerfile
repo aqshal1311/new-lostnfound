@@ -1,7 +1,7 @@
 FROM php:8.3-fpm
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y nginx-full
     git curl unzip \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev libzip-dev \
     nginx supervisor gettext-base \
