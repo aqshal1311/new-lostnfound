@@ -11,11 +11,14 @@ server {
 
     location ~ \.php$ {
         include fastcgi_params;
+
         fastcgi_pass unix:/var/run/php/php-fpm.sock;
 
-        # FIX: benarkan SCRIPT_FILENAME & hilangkan PATH_INFO yang rusak
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO "";
+        # FIX SCRIPT_FILENAME (wajib benar)
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+
+        # FIX PATH_INFO (opsional)
+        fastcgi_param PATH_INFO $fastcgi_path_info;
 
         fastcgi_index index.php;
     }
