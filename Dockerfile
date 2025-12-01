@@ -28,6 +28,8 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 # Copy Nginx config
 COPY ./nginx.conf.template /etc/nginx/conf.d/default.conf.template
 
+COPY ./mime.types /etc/nginx/mime.types
+
 # Supervisor config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
