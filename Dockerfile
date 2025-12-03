@@ -32,10 +32,14 @@ RUN mkdir -p /var/log/nginx
 RUN mkdir -p /var/run
 
 # Copy Nginx global config
+# Copy Nginx global config
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Supervisor config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Copy Nginx server template
+COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
+
+# Copy Supervisor config
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
