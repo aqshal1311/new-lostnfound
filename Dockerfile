@@ -23,8 +23,9 @@ RUN mkdir -p /var/run
 
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
-COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-n"]
+CMD ["usr/bin/supervisord", "-n"]
