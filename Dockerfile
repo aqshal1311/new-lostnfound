@@ -1,6 +1,5 @@
 FROM php:8.3-fpm
 
-# Install dependencies
 RUN apt-get update && apt-get install -y \
     nginx-full \
     git curl unzip \
@@ -9,38 +8,23 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
-# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Workdir
 WORKDIR /var/www/html
 
-# Copy project
 COPY . .
 
-# Composer install
 RUN composer install --no-dev --optimize-autoloader
 
-# Permissions
 RUN chmod -R 777 storage bootstrap/cache
 
-# Permission
-RUN chmod -R 777 storage bootstrap/cache
-
-# Fix nginx folder issues
 RUN mkdir -p /var/log/nginx
 RUN mkdir -p /var/run
 
-# Copy Nginx global config
-# Copy Nginx global config
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
-# Copy Nginx server template
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
-
-# Copy Supervisor config
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-n"]
+CMD ["usr/bin/supervisord", "-n"]
