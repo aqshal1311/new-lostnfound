@@ -13,15 +13,20 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
+# Create required folders
+RUN mkdir -p /var/log/nginx && touch /var/log/nginx/error.log
+RUN mkdir -p /var/run/php
+
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy Laravel project
+# Copy project
 COPY . .
 
-# Install composer
+# Copy composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+# Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Fix permissions
@@ -32,7 +37,7 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy Supervisor config
-COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
